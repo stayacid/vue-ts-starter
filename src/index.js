@@ -8,7 +8,8 @@ new Vue({
   render: h =>(App)
 }).$mount('#app')
 
-//style
-import './css/main.css'
+// SCSS
 import './scss/main.scss'
-//import libs styles here
+
+// CSS (example)
+// import './assets/css/main.css'
