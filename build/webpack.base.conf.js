@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const copyWebpackPlugin = require("copy-webpack-plugin");
 const htmlWebpackPlugin = require("html-webpack-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
 
 const PATHS = {
   src: path.join(__dirname, '../src'),
@@ -23,11 +24,24 @@ module.exports = {
     // publicPath: '/'
   },
   module: {
-    rules: [{
+    rules: [
+      // JavaScript
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: '/node_modules/'
       },
+      // Vue
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options:{
+          loaders: {
+            scss: 'vue-style-loader!css-loader!sass-loader'
+          }
+        }
+      },
+      //CSS
       {
         test: /\.css$/,
         use: [
@@ -55,6 +69,7 @@ module.exports = {
           }
         ]
       },
+      //SCSS
       {
         test: /\.scss$/,
         use: [
@@ -81,7 +96,9 @@ module.exports = {
             },
           }
         ]
-      }, {
+      }, 
+      //IMG
+      {
         test: /\.(png|jpg|gif|svg|webp)$/,
         loader: 'file-loader',
         options: {
@@ -90,7 +107,14 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    //alias for shorter name
+    alias: {
+      'vue$': 'vue/dist/vue.js' 
+    }
+  },
   plugins: [
+    new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: `${PATHS.assets}css/[name].css`,
     }),
