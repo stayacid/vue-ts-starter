@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const copyWebpackPlugin = require("copy-webpack-plugin");
 const htmlWebpackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //clean dist folder before build
 
 const PATHS = {
   src: path.join(__dirname, '../src'),
@@ -15,13 +16,25 @@ module.exports = {
     paths: PATHS
   },
   entry: {
-    app: PATHS.src
+    app: PATHS.src,
+    lk: `${PATHS.src}/lk.js`,
   },
-
   output: {
-    filename: `${PATHS.assets}js/[name].js`,
+    filename: `${PATHS.assets}js/[name].[contenthash].js`,
     path: PATHS.dist,
     // publicPath: '/'
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendore: {
+          name: 'vendors',
+          test: /node_modules/,
+          chunks: 'all',
+          enforce: true
+        }
+      }
+    }
   },
   module: {
     rules: [
@@ -110,18 +123,19 @@ module.exports = {
   resolve: {
     //alias for shorter name
     alias: {
-      'vue$': 'vue/dist/vue.js' 
+      'vue$': 'vue/dist/vue.esm.js' 
     }
   },
   plugins: [
     new VueLoaderPlugin(),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: `${PATHS.assets}css/[name].css`,
+      filename: `${PATHS.assets}css/[name].[contenthash].css`,
     }),
     new htmlWebpackPlugin({
-      hash: false,
       template: `${PATHS.src}/index.html`,
-      filename: './index.html'
+      filename: './index.html',
+      //inject: false //remove css and js injection
     }),
     new copyWebpackPlugin([{
       from: `${PATHS.src}/img`,
