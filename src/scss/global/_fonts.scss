@@ -1,11 +1,59 @@
-//EXAMPLE
-// @include font-face( 
-//   "MullerBold",
-//   "../fonts/MullerBold",
-//   400,
-//   normal,
-//   woff woff2 
-// );
+@include font-face( 
+  "TT Norms",
+  "/assets/fonts/TTNorms-Thin",
+  100,
+  normal,
+  woff woff2 
+);
+
+@include font-face( 
+  "TT Norms",
+  "/assets/fonts/TTNorms-ExtraLight",
+  200,
+  normal,
+  woff woff2 
+); 
+
+@include font-face( 
+  "TT Norms",
+  "/assets/fonts/TTNorms-Light",
+  300,
+  normal,
+  woff woff2 
+); 
+
+@include font-face( 
+  "TT Norms",
+  "/assets/fonts/TTNorms-Italic",
+  400,
+  italic,
+  woff woff2 
+); 
+
+@include font-face( 
+  "TT Norms",
+  "/assets/fonts/TTNorms-Regular",
+  400,
+  normal,
+  woff woff2 
+); 
+
+@include font-face( 
+  "TT Norms",
+  "/assets/fonts/TTNorms-Medium",
+  500,
+  normal,
+  woff woff2 
+); 
+
+@include font-face( 
+  "TT Norms",
+  "/assets/fonts/TTNorms-Bold",
+  700,
+  bold,
+  woff woff2 
+); 
+
 
 /* weights
 thin-100

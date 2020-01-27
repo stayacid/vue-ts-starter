@@ -71,7 +71,7 @@ module.exports = {
             options: {
               sourceMap: true,
               config: {
-                path: `${PATHS.src}/js/postcss.config.js`
+                path: './postcss.config.js'
               }
             },
           }, {
@@ -99,7 +99,7 @@ module.exports = {
             options: {
               sourceMap: true,
               config: {
-                path: `${PATHS.src}/js/postcss.config.js`
+                path: './postcss.config.js'
               }
             },
           }, {
@@ -117,12 +117,21 @@ module.exports = {
         options: {
           name: '[name].[ext]'
         }
+      },
+      //fonts
+      {
+        test: /\.(woff(2)?)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]'
+        }
       }
     ]
   },
   resolve: {
     //alias for shorter name
     alias: {
+      '~': 'src',
       'vue$': 'vue/dist/vue.esm.js' 
     }
   },
@@ -137,12 +146,10 @@ module.exports = {
       filename: './index.html',
       //inject: false //remove css and js injection
     }),
-    new copyWebpackPlugin([{
-      from: `${PATHS.src}/img`,
-      to: `${PATHS.assets}img`
-    }, {
-      from: `${PATHS.src}/static`,
-      to: ''
-    }])
+    new copyWebpackPlugin([
+      {from: `${PATHS.src}/${PATHS.assets}/img`, to: `${PATHS.assets}img`}, 
+      {from: `${PATHS.src}/${PATHS.assets}/fonts`, to: `${PATHS.assets}fonts`}, 
+      {from: `${PATHS.src}/static`, to: ''}
+    ])
   ],
 }
