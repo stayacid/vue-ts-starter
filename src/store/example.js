@@ -1,7 +1,7 @@
 export default {
   //data
   state: {
-    message: 'and vue rules'
+    message: 'Vue rules'
   },
   //sync actions
   mutations: {

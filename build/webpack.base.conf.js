@@ -1,15 +1,28 @@
 const path = require('path');
+const fs = require("fs");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const copyWebpackPlugin = require("copy-webpack-plugin");
-const htmlWebpackPlugin = require("html-webpack-plugin");
-const { VueLoaderPlugin } = require("vue-loader");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //clean dist folder before build
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const {
+  VueLoaderPlugin
+} = require("vue-loader");
+const {
+  CleanWebpackPlugin
+} = require('clean-webpack-plugin'); //clean dist folder before build
 
+// Main const. Feel free to change it
 const PATHS = {
   src: path.join(__dirname, '../src'),
   dist: path.join(__dirname, '../dist'),
   assets: 'assets/'
 }
+
+// Pages const for HtmlWebpackPlugin
+// see more: https://github.com/vedees/webpack-template/blob/master/README.md#html-dir-folder
+const PAGES_DIR = `${PATHS.src}/pug/pages/`;
+const PAGES = fs
+  .readdirSync(PAGES_DIR)
+  .filter(fileName => fileName.endsWith(".pug"));
 
 module.exports = {
   externals: {
@@ -38,6 +51,11 @@ module.exports = {
   },
   module: {
     rules: [
+      // PUG
+      {
+        test: /\.pug$/,
+        loader: 'pug-loader',
+      },
       // JavaScript
       {
         test: /\.js$/,
@@ -48,7 +66,7 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options:{
+        options: {
           loaders: {
             scss: 'vue-style-loader!css-loader!sass-loader'
           }
@@ -109,7 +127,7 @@ module.exports = {
             },
           }
         ]
-      }, 
+      },
       //IMG
       {
         test: /\.(png|jpg|gif|svg|webp)$/,
@@ -132,7 +150,7 @@ module.exports = {
     //alias for shorter name
     alias: {
       '~': 'src',
-      'vue$': 'vue/dist/vue.esm.js' 
+      'vue$': 'vue/dist/vue.esm.js'
     }
   },
   plugins: [
@@ -141,15 +159,32 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: `${PATHS.assets}css/[name].[contenthash].css`,
     }),
-    new htmlWebpackPlugin({
-      template: `${PATHS.src}/index.html`,
-      filename: './index.html',
-      //inject: false //remove css and js injection
-    }),
-    new copyWebpackPlugin([
-      {from: `${PATHS.src}/${PATHS.assets}/img`, to: `${PATHS.assets}img`}, 
-      {from: `${PATHS.src}/${PATHS.assets}/fonts`, to: `${PATHS.assets}fonts`}, 
-      {from: `${PATHS.src}/static`, to: ''}
-    ])
+    new copyWebpackPlugin([{
+        from: `${PATHS.src}/${PATHS.assets}/img`,
+        to: `${PATHS.assets}img`
+      },
+      {
+        from: `${PATHS.src}/${PATHS.assets}/fonts`,
+        to: `${PATHS.assets}fonts`
+      },
+      {
+        from: `${PATHS.src}/static`,
+        to: ''
+      }
+    ]),
+    /*
+      Automatic creation any html pages (Don't forget to RERUN dev server!)
+      See more:
+      https://github.com/vedees/webpack-template/blob/master/README.md#create-another-html-files
+      Best way to create pages:
+      https://github.com/vedees/webpack-template/blob/master/README.md#third-method-best
+    */
+    ...PAGES.map(
+      page =>
+      new HtmlWebpackPlugin({
+        template: `${PAGES_DIR}/${page}`,
+        filename: `./${page.replace(/\.pug/,'.html')}`
+      })
+    )
   ],
 }

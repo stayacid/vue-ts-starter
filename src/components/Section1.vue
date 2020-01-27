@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>Webpack {{ message }}</h1>
+    <h1>{{ message }}</h1>
     <img src="assets/img/Screen1.png" alt="">
   </section>
 </template>
@@ -19,9 +19,13 @@
 </script>
 
 <style lang="scss">
-  @import '../scss/main.scss'; // or just vars 
+  @import '../scss/main.scss'; // be careful - this styles will overwrite styles below
   section {
-    background-color: $black;
-    color: $white;
+    color: $black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
+
 </style>
