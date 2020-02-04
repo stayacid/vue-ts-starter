@@ -277,5 +277,10 @@ Example: `.woff, .woffs` formats;
 Example: `@include font-face("OpenSans", "../fonts/OpenSans/opensans");`,
 Example 2: `@include font-face("OpenSans", "../fonts/OpenSans/opensansItalic", 400, italic);`.
 
+## Image compression:
+
+Images will be compressed on build by 'imagemin-webpack-plugin'. SVG won't be compressed
+
+
 ## License
 [MIT](./LICENSE)
