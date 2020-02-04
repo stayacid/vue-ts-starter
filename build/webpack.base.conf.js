@@ -10,7 +10,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //clean dist fol
 const PATHS = {
   src: path.join(__dirname, '../src'),
   dist: path.join(__dirname, '../dist'),
-  assets: 'assets/'
+  assets: 'assets/',
+  scss: './src/scss'
 }
 
 // Pages const for HtmlWebpackPlugin
@@ -131,7 +132,24 @@ module.exports = {
             options: {
               sourceMap: true
             },
-          }
+          },
+          {
+            //import global vars/mixins/ styles into every component
+            loader: 'sass-resources-loader',
+            options: {
+                resources: [
+                  //helpers
+                  //`${PATHS.scss}/global/helpers/_normalize.scss`,
+                  `${PATHS.scss}/global/helpers/_variables.scss`,
+                  //mixins
+                  `${PATHS.scss}/global/mixins/_clearfix.scss`,
+                  `${PATHS.scss}/global/mixins/_fluid-type.scss`,
+                  `${PATHS.scss}/global/mixins/_font-face.scss`,
+                  `${PATHS.scss}/global/mixins/_mediaquery.scss`,
+                  `${PATHS.scss}/global/mixins/_pseudo.scss`,
+                ]
+            }
+        }
         ]
       },
       //IMG

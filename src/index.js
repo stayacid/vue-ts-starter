@@ -14,7 +14,11 @@ new Vue({
 })
 
 // SCSS
-import './scss/main.scss'
+import './scss/global/_fonts.scss'
+import './scss/global/helpers/_normalize.scss'
+import './scss/global/_base.scss';
+import './scss/global/_container.scss';
+import './scss/global/_typography.scss';
 
 // CSS (example)
 // import './assets/css/main.css'

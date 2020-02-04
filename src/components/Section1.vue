@@ -1,11 +1,20 @@
 <template lang="pug">
   section
     h1 {{ message }}
+    icon-base(iconColor="black")
+      icon-burger
     img(src="assets/img/Screen1.png" alt="")
 </template>
 
 <script>
+  import IconBase from './global/IconBase.vue'
+  import IconBurger from './icons/Iconburger.vue'
+
   export default {
+    components: {
+      IconBase,
+      IconBurger,
+    },
     data() {
       return {
         message: null
@@ -17,8 +26,7 @@
   }
 </script>
 
-<style lang="scss">
-  @import '../scss/main.scss'; // be careful - this styles will overwrite styles below
+<style lang="scss" scoped>
   section {
     color: $black;
     display: flex;
