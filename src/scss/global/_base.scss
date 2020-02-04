@@ -22,10 +22,6 @@ body {
   line-height: 1.2;
   font-weight: 400;
   color: $black;
-  //Flexbox
-  display: flex;
-  flex-flow: column;
-  min-height: 100vh;
   overflow-anchor: auto;
   scroll-behavior: smooth;
   text-rendering: auto; 

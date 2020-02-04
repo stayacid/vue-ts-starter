@@ -1,7 +1,7 @@
-<template>
-  <main>
-    <Section1/>
-  </main>
+<template lang="pug">
+  div#app
+    main
+      Section1
 </template>
 
 <script>
@@ -12,3 +12,11 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  #app {
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
+  }
+</style>
