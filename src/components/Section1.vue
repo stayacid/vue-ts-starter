@@ -1,8 +1,7 @@
-<template>
-  <section>
-    <h1>{{ message }}</h1>
-    <img src="assets/img/Screen1.png" alt="">
-  </section>
+<template lang="pug">
+  section
+    h1 {{ message }}
+    img(src="assets/img/Screen1.png" alt="")
 </template>
 
 <script>
