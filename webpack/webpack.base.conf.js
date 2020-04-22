@@ -1,10 +1,10 @@
-const path = require('path')
-const fs = require('fs')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const copyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { VueLoaderPlugin } = require('vue-loader')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin') // clean dist folder before build
+const path = require('path');
+const fs = require('fs');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // clean dist folder before build
 
 // Main const. Feel free to change it
 const PATHS = {
@@ -12,14 +12,14 @@ const PATHS = {
   dist: path.join(__dirname, '../dist'),
   assets: 'assets/',
   scss: './src/scss',
-}
+};
 
 // Pages const for HtmlWebpackPlugin
 // see more: https://github.com/vedees/webpack-template/blob/master/README.md#html-dir-folder
-const PAGES_DIR = `${PATHS.src}/pug/pages/`
+const PAGES_DIR = `${PATHS.src}/pug/pages/`;
 const PAGES = fs
   .readdirSync(PAGES_DIR)
-  .filter(fileName => fileName.endsWith('.pug'))
+  .filter((fileName) => fileName.endsWith('.pug'));
 
 module.exports = {
   externals: {
@@ -79,11 +79,6 @@ module.exports = {
       {
         test: /\.vue$/,
         use: ['vue-loader', 'eslint-loader'],
-        /*options: {
-          loaders: {
-            scss: 'vue-style-loader!css-loader!sass-loader', // Prefixing with ! will disable all configured normal loaders
-          },
-        },*/
       },
       // CSS and `<style>` внутри файлов `.vue`
       { 
@@ -105,12 +100,7 @@ module.exports = {
                 path: './postcss.config.js',
               },
             },
-          }, /*{
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
-          },*/
+          },
         ],
       },
       // SCSS and `<style lang="scss">` в файлах `.vue`
@@ -180,6 +170,7 @@ module.exports = {
     // alias for shorter name
     alias: {
       '~': 'src', // why do i need this?
+      // eslint-disable-next-line quote-props
       'vue$': 'vue/dist/vue.esm.js',
     },
   },
@@ -189,7 +180,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: `${PATHS.assets}css/[name].[contenthash].css`,
     }),
-    new copyWebpackPlugin([{
+    new CopyWebpackPlugin([{
       from: `${PATHS.src}/${PATHS.assets}/img`,
       to: `${PATHS.assets}img`,
     },
@@ -210,11 +201,10 @@ module.exports = {
       https://github.com/vedees/webpack-template/blob/master/README.md#third-method-best
     */
     ...PAGES.map(
-      page =>
-        new HtmlWebpackPlugin({
-          template: `${PAGES_DIR}/${page}`,
-          filename: `./${page.replace(/\.pug/, '.html')}`,
-        }),
+      (page) => new HtmlWebpackPlugin({
+        template: `${PAGES_DIR}/${page}`,
+        filename: `./${page.replace(/\.pug/, '.html')}`,
+      }),
     ),
   ],
-}
+};
