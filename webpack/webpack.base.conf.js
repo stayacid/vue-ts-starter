@@ -63,27 +63,33 @@ module.exports = {
           },
         ],
       },
-      // JavaScript
+      // JavaScript and `<script>` внутри файлов `.vue`
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+      },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
         exclude: /node_modules/,
+        loader: 'babel-loader',
       },
       // Vue
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
+        use: ['vue-loader', 'eslint-loader'],
+        /*options: {
           loaders: {
-            scss: 'vue-style-loader!css-loader!sass-loader',
+            scss: 'vue-style-loader!css-loader!sass-loader', // Prefixing with ! will disable all configured normal loaders
           },
-        },
+        },*/
       },
-      // CSS
-      {
+      // CSS and `<style>` внутри файлов `.vue`
+      { 
         test: /\.css$/,
         use: [
-          'style-loader',
+          'vue-style-loader',
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
@@ -99,19 +105,19 @@ module.exports = {
                 path: './postcss.config.js',
               },
             },
-          }, {
+          }, /*{
             loader: 'sass-loader',
             options: {
               sourceMap: true,
             },
-          },
+          },*/
         ],
       },
-      // SCSS
+      // SCSS and `<style lang="scss">` в файлах `.vue`
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          'vue-style-loader',
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',

@@ -1,21 +1,20 @@
 export default {
-  //data
+  // data
   state: {
-    message: 'Vue rules'
+    message: 'Vue rules',
   },
-  //sync actions
+  // sync actions
   mutations: {
 
   },
-  //async actions
+  // async actions
   actions: {
 
   },
-  //return data from state
+  // return data from state
   getters: {
-    getMessage (state) {
-      return state.message
-    }
-  }
-
-}
+    getMessage(state) {
+      return state.message;
+    },
+  },
+};

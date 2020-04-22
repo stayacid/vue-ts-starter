@@ -5,12 +5,13 @@
 </template>
 
 <script>
-  import Example from './components/pages/Example.vue'
-  export default {
-    components: {
-      ExamplePage: Example
-    }
-  }
+import Example from './components/pages/Example.vue';
+
+export default {
+  components: {
+    ExamplePage: Example,
+  },
+};
 </script>
 
 <style lang="scss" scoped>

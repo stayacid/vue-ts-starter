@@ -7,23 +7,23 @@
 </template>
 
 <script>
-  import IconBase from '../global/IconBase.vue'
-  import IconBurger from '../icons/Iconburger.vue'
+import IconBase from '../global/IconBase.vue';
+import IconBurger from '../icons/IconBurger.vue';
 
-  export default {
-    components: {
-      IconBase,
-      IconBurger,
-    },
-    data() {
-      return {
-        message: null
-      }
-    },
-    created() {
-      this.message = this.$store.getters.getMessage
-    }
-  }
+export default {
+  components: {
+    IconBase,
+    IconBurger,
+  },
+  data() {
+    return {
+      message: null,
+    };
+  },
+  created() {
+    this.message = this.$store.getters.getMessage;
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -34,5 +34,4 @@
     justify-content: center;
     align-items: center;
   }
-
 </style>
