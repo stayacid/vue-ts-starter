@@ -1,38 +1,38 @@
-const path = require('path');
-const fs = require("fs");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const copyWebpackPlugin = require("copy-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { VueLoaderPlugin } = require("vue-loader");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //clean dist folder before build
+const path = require('path')
+const fs = require('fs')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const copyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin') // clean dist folder before build
 
 // Main const. Feel free to change it
 const PATHS = {
   src: path.join(__dirname, '../src'),
   dist: path.join(__dirname, '../dist'),
   assets: 'assets/',
-  scss: './src/scss'
+  scss: './src/scss',
 }
 
 // Pages const for HtmlWebpackPlugin
 // see more: https://github.com/vedees/webpack-template/blob/master/README.md#html-dir-folder
-const PAGES_DIR = `${PATHS.src}/pug/pages/`;
+const PAGES_DIR = `${PATHS.src}/pug/pages/`
 const PAGES = fs
   .readdirSync(PAGES_DIR)
-  .filter(fileName => fileName.endsWith(".pug"));
+  .filter(fileName => fileName.endsWith('.pug'))
 
 module.exports = {
   externals: {
-    paths: PATHS
+    paths: PATHS,
   },
   entry: {
     app: PATHS.src,
-    lk: `${PATHS.src}/lk.js`,
+    // common: `${PATHS.src}/common.js`, 
   },
   output: {
     filename: `${PATHS.assets}js/[name].[contenthash].js`,
     path: PATHS.dist,
-    // publicPath: '/'
+    // publicPath: '/html/edge/'
   },
   optimization: {
     splitChunks: {
@@ -41,10 +41,10 @@ module.exports = {
           name: 'vendors',
           test: /node_modules/,
           chunks: 'all',
-          enforce: true
-        }
-      }
-    }
+          enforce: true,
+        },
+      },
+    },
   },
   module: {
     rules: [
@@ -55,19 +55,19 @@ module.exports = {
           // this applies to <template lang="pug"> in Vue components
           {
             resourceQuery: /^\?vue/,
-            use: ['pug-plain-loader']
+            use: ['pug-plain-loader'],
           },
           // this applies to pug imports inside JavaScript
           {
-            use: ['pug-loader']
-          }
-        ]
+            use: ['pug-loader'],
+          },
+        ],
       },
       // JavaScript
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: '/node_modules/'
+        exclude: /node_modules/,
       },
       // Vue
       {
@@ -75,11 +75,11 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            scss: 'vue-style-loader!css-loader!sass-loader'
-          }
-        }
+            scss: 'vue-style-loader!css-loader!sass-loader',
+          },
+        },
       },
-      //CSS
+      // CSS
       {
         test: /\.css$/,
         use: [
@@ -89,25 +89,25 @@ module.exports = {
             loader: 'css-loader',
             options: {
               sourceMap: true,
-              url: false
+              url: false,
             },
           }, {
             loader: 'postcss-loader',
             options: {
               sourceMap: true,
               config: {
-                path: './postcss.config.js'
-              }
+                path: './postcss.config.js',
+              },
             },
           }, {
             loader: 'sass-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
             },
-          }
-        ]
+          },
+        ],
       },
-      //SCSS
+      // SCSS
       {
         test: /\.scss$/,
         use: [
@@ -117,65 +117,65 @@ module.exports = {
             loader: 'css-loader',
             options: {
               sourceMap: true,
-              url: false
+              url: false,
             },
           }, {
             loader: 'postcss-loader',
             options: {
               sourceMap: true,
               config: {
-                path: './postcss.config.js'
-              }
+                path: './postcss.config.js',
+              },
             },
           }, {
             loader: 'sass-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
             },
           },
           {
-            //import global vars/mixins/ styles into every component
+            // import global vars/mixins/ styles into every component
             loader: 'sass-resources-loader',
             options: {
-                resources: [
-                  //helpers
-                  //`${PATHS.scss}/global/helpers/_normalize.scss`,
-                  `${PATHS.scss}/global/helpers/_variables.scss`,
-                  //mixins
-                  `${PATHS.scss}/global/mixins/_clearfix.scss`,
-                  `${PATHS.scss}/global/mixins/_fluid-type.scss`,
-                  `${PATHS.scss}/global/mixins/_font-face.scss`,
-                  `${PATHS.scss}/global/mixins/_mediaquery.scss`,
-                  `${PATHS.scss}/global/mixins/_pseudo.scss`,
-                ]
-            }
-        }
-        ]
+              resources: [
+                // helpers
+                // `${PATHS.scss}/global/helpers/_normalize.scss`,
+                `${PATHS.scss}/helpers/_variables.scss`,
+                // mixins
+                `${PATHS.scss}/mixins/_clearfix.scss`,
+                `${PATHS.scss}/mixins/_fluid-type.scss`,
+                `${PATHS.scss}/mixins/_font-face.scss`,
+                `${PATHS.scss}/mixins/_mediaquery.scss`,
+                `${PATHS.scss}/mixins/_pseudo.scss`,
+              ],
+            },
+          },
+        ],
       },
-      //IMG
+      // IMG
       {
         test: /\.(png|jpg|gif|svg|webp)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]'
-        }
+          name: '[name].[ext]',
+        },
       },
-      //fonts
+      // fonts
       {
         test: /\.(woff(2)?)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]'
-        }
-      }
-    ]
+          name: '[name].[ext]',
+        },
+      },
+    ],
   },
   resolve: {
-    //alias for shorter name
+    // alias for shorter name
     alias: {
-      '~': 'src',
-      'vue$': 'vue/dist/vue.esm.js'
-    }
+      '~': 'src', // why do i need this?
+      'vue$': 'vue/dist/vue.esm.js',
+    },
   },
   plugins: [
     new VueLoaderPlugin(),
@@ -184,17 +184,17 @@ module.exports = {
       filename: `${PATHS.assets}css/[name].[contenthash].css`,
     }),
     new copyWebpackPlugin([{
-        from: `${PATHS.src}/${PATHS.assets}/img`,
-        to: `${PATHS.assets}img`
-      },
-      {
-        from: `${PATHS.src}/${PATHS.assets}/fonts`,
-        to: `${PATHS.assets}fonts`
-      },
-      {
-        from: `${PATHS.src}/static`,
-        to: ''
-      }
+      from: `${PATHS.src}/${PATHS.assets}/img`,
+      to: `${PATHS.assets}img`,
+    },
+    {
+      from: `${PATHS.src}/${PATHS.assets}/fonts`,
+      to: `${PATHS.assets}fonts`,
+    },
+    {
+      from: `${PATHS.src}/${PATHS.assets}/static`,
+      to: '',
+    },
     ]),
     /*
       Automatic creation any html pages (Don't forget to RERUN dev server!)
@@ -205,10 +205,10 @@ module.exports = {
     */
     ...PAGES.map(
       page =>
-      new HtmlWebpackPlugin({
-        template: `${PAGES_DIR}/${page}`,
-        filename: `./${page.replace(/\.pug/,'.html')}`
-      })
-    )
+        new HtmlWebpackPlugin({
+          template: `${PAGES_DIR}/${page}`,
+          filename: `./${page.replace(/\.pug/, '.html')}`,
+        }),
+    ),
   ],
 }

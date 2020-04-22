@@ -1,7 +1,7 @@
-const merge = require('webpack-merge');
-const baseWebpackConfig = require('./webpack.base.conf');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const imageminMozjpeg = require('imagemin-mozjpeg');
+const merge = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.base.conf')
+const ImageminPlugin = require('imagemin-webpack-plugin').default
+const imageminMozjpeg = require('imagemin-mozjpeg')
 
 const buildWebpackConfig = merge(baseWebpackConfig, {
   mode: 'production',

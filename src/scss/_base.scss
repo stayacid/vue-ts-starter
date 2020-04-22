@@ -17,11 +17,11 @@ html {
 }
 
 body {
+  color: $black;
   font-family: $font-family-main;
   font-size: $font-size-main;
-  line-height: 1.2;
   font-weight: 400;
-  color: $black;
+  line-height: 1.2;
   overflow-anchor: auto;
   scroll-behavior: smooth;
   text-rendering: auto; 

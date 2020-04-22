@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import IconBase from './global/IconBase.vue'
-  import IconBurger from './icons/Iconburger.vue'
+  import IconBase from '../global/IconBase.vue'
+  import IconBurger from '../icons/Iconburger.vue'
 
   export default {
     components: {

@@ -1,14 +1,14 @@
 <template lang="pug">
   div#app
     main
-      Section1
+      example-page
 </template>
 
 <script>
-  import Section1 from './components/Section1.vue'
+  import Example from './components/pages/Example.vue'
   export default {
     components: {
-      Section1
+      ExamplePage: Example
     }
   }
 </script>
