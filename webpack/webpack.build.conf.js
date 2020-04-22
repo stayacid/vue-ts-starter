@@ -1,7 +1,7 @@
-const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.conf')
-const ImageminPlugin = require('imagemin-webpack-plugin').default
-const imageminMozjpeg = require('imagemin-mozjpeg')
+const merge = require('webpack-merge');
+const imageminMozjpeg = require('imagemin-mozjpeg');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const baseWebpackConfig = require('./webpack.base.conf');
 
 const buildWebpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
@@ -9,16 +9,16 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
     new ImageminPlugin({
       test: /\.(jpe?g|png|gif|svg)$/i,
       pngquant: {
-        quality: '70'
+        quality: '70',
       },
       plugins: [imageminMozjpeg({
         quality: 70,
-        progressive: true
-      })]
-    })
-  ]
-})
+        progressive: true,
+      })],
+    }),
+  ],
+});
 
-module.exports = new Promise((resolve, reject) => {
-  resolve(buildWebpackConfig)
-})
+module.exports = new Promise((resolve) => {
+  resolve(buildWebpackConfig);
+});
