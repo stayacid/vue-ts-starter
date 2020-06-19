@@ -2,7 +2,7 @@
 
 ``` bash
 # Download repository:
-git clone https://gitlab.com/stayacid/vue-template
+git clone https://github.com/stayacid/webpack-vue-bundler.git
 
 # Install dependencies:
 npm i
@@ -169,7 +169,6 @@ Example:
     }),
 ```
 
-
 ## Vue install:
 Default: **already have**
 
@@ -208,19 +207,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   // vuex content
 })
-```
-
-## Add Vue Components:
-Create your component in `/components/`
-
-**HTML Usage:**
-1. Init component in `index.js`:
-``` js
-Vue.component('example-component', require('./components/Example.vue').default)
-```
-2. Any html files:
-``` html
- <example-component />
 ```
 
 **VUE Usage:**
@@ -280,7 +266,6 @@ Example 2: `@include font-face("OpenSans", "../fonts/OpenSans/opensansItalic", 4
 ## Image compression:
 
 Images will be compressed on build by 'imagemin-webpack-plugin'. SVG won't be compressed
-
 
 ## License
 [MIT](./LICENSE)
