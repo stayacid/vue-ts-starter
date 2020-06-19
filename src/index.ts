@@ -27,11 +27,11 @@ import store from './store/store';
 
 
 // router
-const router = new VueRouter({
+const router: VueRouter = new VueRouter({
   routes,
-  // mode: 'history', // remove hash from url but needs to set server to always return index.html
+  mode: 'history', // remove hash from url but needs to set server to always return index.html
 });
-Vue.use(router);
+Vue.use(VueRouter);
 /* router.beforeEach((to, from, next) => { // example of router hook
   store.commit('m_closeFilters')
   next()
@@ -48,6 +48,7 @@ Vue.use(router);
 new Vue({
   el: '#app',
   store,
+  router,
   render: (h) => h(App),
 });
 

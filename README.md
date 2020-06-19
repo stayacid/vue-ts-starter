@@ -208,6 +208,7 @@ export default new Vuex.Store({
   // vuex content
 })
 ```
+4. If you can't set server to always return index.html, uncomment 'host' in webpack.dev.conf and comment "mode: 'history'" in index.js
 
 **VUE Usage:**
 1. import components in .vue:

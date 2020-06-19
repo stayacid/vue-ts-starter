@@ -2,11 +2,11 @@ module.exports = {
   ignorePatterns: ["node_modules/"],
 
   rules: {
-    'vue/component-tags-order': ['error', {
-      'order': ['template', 'script', 'style']
-    }],
-    'linebreak-style': ['error', 'unix'],
-    'no-trailing-spaces': "off",
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    "comma-dangle": ["error", "always-multiline"],
+    "no-trailing-spaces": "off",
+    "space-before-function-paren": "off"
   },
 
   root: true,
@@ -16,15 +16,13 @@ module.exports = {
   },
 
   extends: [
-    //'eslint:recommended',
-    //'plugin:vue/recommended',
-    //'plugin:vue/essential',
-    "airbnb-base",
-    'plugin:vue/vue3-recommended'
-    //'@vue/standard'
+    'plugin:vue/essential',
+    'eslint:recommended',
+    '@vue/typescript'
   ],
 
   parserOptions: {
-    ecmaVersion: 2020
+    "ecmaFeatures": { "legacyDecorators": true },
+    "parser": "babel-eslint",
   }
 }
