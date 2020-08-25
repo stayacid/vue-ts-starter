@@ -268,5 +268,8 @@ Example 2: `@include font-face("OpenSans", "../fonts/OpenSans/opensansItalic", 4
 
 Images will be compressed on build by 'imagemin-webpack-plugin'. SVG won't be compressed
 
+## SVG component:
+Please, be careful. Pass as prop viewbox of original svg. 
+
 ## License
 [MIT](./LICENSE)

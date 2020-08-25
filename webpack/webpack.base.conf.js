@@ -1,51 +1,51 @@
-const path = require('path')
-const fs = require('fs')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const СopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { VueLoaderPlugin } = require('vue-loader')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin') // clean dist folder before build
+const path = require("path");
+const fs = require("fs");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const СopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // clean dist folder before build
 
 // Main const. Feel free to change it
 const PATHS = {
-  src: path.join(__dirname, '../src'),
-  dist: path.join(__dirname, '../dist'),
-  assets: 'assets/',
-  scss: './src/scss',
-}
+  src: path.join(__dirname, "../src"),
+  dist: path.join(__dirname, "../dist"),
+  assets: "assets/",
+  scss: "./src/scss"
+};
 
 // Pages const for HtmlWebpackPlugin
 // see more: https://github.com/vedees/webpack-template/blob/master/README.md#html-dir-folder
-const PAGES_DIR = `${PATHS.src}/pug/pages/`
+const PAGES_DIR = `${PATHS.src}/pug/pages/`;
 const PAGES = fs
   .readdirSync(PAGES_DIR)
-  .filter(fileName => fileName.endsWith('.pug'))
+  .filter(fileName => fileName.endsWith(".pug"));
 
 module.exports = {
   externals: {
     paths: PATHS,
-    moment: 'moment',
+    moment: "moment"
   },
   entry: {
-    app: ['babel-polyfill', `${PATHS.src}/index.ts`],
-    // common: `${PATHS.src}/common.js`, 
+    app: ["babel-polyfill", `${PATHS.src}/index.ts`]
+    // common: `${PATHS.src}/common.js`,
   },
   output: {
     filename: `${PATHS.assets}js/[name].[contenthash].js`,
-    path: PATHS.dist,
+    path: PATHS.dist
     // publicPath: '/html/edge/'
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
         vendore: {
-          name: 'vendors',
+          name: "vendors",
           test: /node_modules/,
-          chunks: 'all',
-          enforce: true,
-        },
-      },
-    },
+          chunks: "all",
+          enforce: true
+        }
+      }
+    }
   },
   module: {
     rules: [
@@ -56,95 +56,99 @@ module.exports = {
           // this applies to <template lang="pug"> in Vue components
           {
             resourceQuery: /^\?vue/,
-            use: ['pug-plain-loader'],
+            use: ["pug-plain-loader"]
           },
           // this applies to pug imports inside JavaScript
           {
-            use: ['pug-loader'],
-          },
-        ],
+            use: ["pug-loader"]
+          }
+        ]
       },
       // JavaScript
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
+        loader: "babel-loader",
+        exclude: /node_modules/
       },
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
+        loader: "ts-loader",
         exclude: /node_modules/,
         options: {
-          appendTsSuffixTo: [/\.vue$/],
-        },
+          appendTsSuffixTo: [/\.vue$/]
+        }
       },
       // Vue
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: "vue-loader",
         options: {
           loaders: {
-            scss: 'vue-style-loader!css-loader!sass-loader',
-          },
-        },
+            scss: "vue-style-loader!css-loader!sass-loader"
+          }
+        }
       },
       // CSS
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          "style-loader",
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true,
-              url: false,
-            },
-          }, {
-            loader: 'postcss-loader',
+              url: false
+            }
+          },
+          {
+            loader: "postcss-loader",
             options: {
               sourceMap: true,
               config: {
-                path: './postcss.config.js',
-              },
-            },
-          }, {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
+                path: "./postcss.config.js"
+              }
+            }
           },
-        ],
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
       },
       // SCSS
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          "style-loader",
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true,
-              url: false,
-            },
-          }, {
-            loader: 'postcss-loader',
+              url: false
+            }
+          },
+          {
+            loader: "postcss-loader",
             options: {
               sourceMap: true,
               config: {
-                path: './postcss.config.js',
-              },
-            },
-          }, {
-            loader: 'sass-loader',
+                path: "./postcss.config.js"
+              }
+            }
+          },
+          {
+            loader: "sass-loader",
             options: {
-              sourceMap: true,
-            },
+              sourceMap: true
+            }
           },
           {
             // import global vars/mixins/ styles into every component
-            loader: 'sass-resources-loader',
+            loader: "sass-resources-loader",
             options: {
               resources: [
                 // helpers
@@ -155,57 +159,60 @@ module.exports = {
                 `${PATHS.scss}/mixins/_fluid-type.scss`,
                 `${PATHS.scss}/mixins/_font-face.scss`,
                 `${PATHS.scss}/mixins/_mediaquery.scss`,
-                `${PATHS.scss}/mixins/_pseudo.scss`,
-              ],
-            },
-          },
-        ],
+                `${PATHS.scss}/mixins/_pseudo.scss`
+              ]
+            }
+          }
+        ]
       },
       // IMG
       {
         test: /\.(png|jpg|gif|svg|webp)$/,
-        loader: 'file-loader',
+        loader: "file-loader",
         options: {
-          name: '[name].[ext]',
-        },
+          name: "[name].[ext]"
+        }
       },
       // fonts
       {
         test: /\.(woff(2)?)$/,
-        loader: 'file-loader',
+        loader: "file-loader",
         options: {
-          name: '[name].[ext]',
-        },
-      },
-    ],
+          name: "[name].[ext]"
+        }
+      }
+    ]
   },
   resolve: {
-    extensions: ['.ts', '.js', '.vue', '.json'],
+    extensions: [".ts", ".js", ".vue", ".json"],
     // alias for shorter name
     alias: {
-      '~': 'src',
-      'vue$': 'vue/dist/vue.esm.js',
-    },
+      "~": "src",
+      vue$: "vue/dist/vue.esm.js"
+    }
   },
   plugins: [
     new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: `${PATHS.assets}css/[name].[contenthash].css`,
+      filename: `${PATHS.assets}css/[name].[contenthash].css`
     }),
-    new СopyWebpackPlugin([{
-      from: `${PATHS.src}/${PATHS.assets}/img`,
-      to: `${PATHS.assets}img`,
-    },
-    {
-      from: `${PATHS.src}/${PATHS.assets}/fonts`,
-      to: `${PATHS.assets}fonts`,
-    },
-    {
-      from: `${PATHS.src}/static`,
-      to: '',
-    },
-    ]),
+    new СopyWebpackPlugin({
+      patterns: [
+        {
+          from: `${PATHS.src}/${PATHS.assets}/img`,
+          to: `${PATHS.assets}img`
+        },
+        {
+          from: `${PATHS.src}/${PATHS.assets}/fonts`,
+          to: `${PATHS.assets}fonts`
+        },
+        {
+          from: `${PATHS.src}/static`,
+          to: ""
+        }
+      ]
+    }),
     /*
       Automatic creation any html pages (Don't forget to RERUN dev server!)
       See more:
@@ -217,8 +224,8 @@ module.exports = {
       page =>
         new HtmlWebpackPlugin({
           template: `${PAGES_DIR}/${page}`,
-          filename: `./${page.replace(/\.pug/, '.html')}`,
-        }),
-    ),
-  ],
-}
+          filename: `./${page.replace(/\.pug/, ".html")}`
+        })
+    )
+  ]
+};
