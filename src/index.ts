@@ -1,5 +1,5 @@
 // JS
-import './js/common';
+import './ts/common.ts';
 // SCSS
 import './scss/_fonts.scss';
 import './scss/helpers/_normalize.scss';
@@ -14,11 +14,11 @@ import './scss/_typography.scss';
 import Vue from 'vue';
 
 // custom plugins
-// import testPlugin from './js/plugins/testPlugin'
+//import testPlugin from './ts/plugins/testPlugin.ts'
 
 // router
 import VueRouter from 'vue-router';
-import routes from './js/routes';
+import routes from './ts/routes.ts';
 
 // app
 import App from './App.vue';
