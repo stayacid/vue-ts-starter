@@ -1,4 +1,7 @@
 # TO DO
+- проверить, работают ли плагины в postcss.config.js
+- переписать store
+- переписать компоненты на ts
 
 ## Important
   ### Styles

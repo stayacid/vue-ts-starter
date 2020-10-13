@@ -2,12 +2,12 @@
 
 ``` bash
 # Download repository:
-git clone https://github.com/stayacid/webpack-vue-bundler.git
+git clone https://github.com/stayacid/vue-ts-starter.git
 
 # Install dependencies:
 npm i
 
-# Server with hot reload at http://localhost:8081/
+# Server with hot reload at http://localhost:8088/
 npm run dev
 
 # Output will be at dist/ folder
