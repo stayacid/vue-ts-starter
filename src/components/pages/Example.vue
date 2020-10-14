@@ -3,7 +3,7 @@
     h1 {{ message }}
     icon-base(iconColor="black")
       icon-burger
-    img(src="assets/img/Screen1.png" alt="")
+    img(src="assets/img/Screenshot_1.jpg" alt="Loading")
 </template>
 
 <script>
