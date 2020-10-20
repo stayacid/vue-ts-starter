@@ -1,4 +1,10 @@
 module.exports = {
+  pages: {
+    index: {
+      entry: './src/main.ts',
+      template: './public/index.pug'
+    }
+  },
   css: {
     loaderOptions: {
       scss: {
