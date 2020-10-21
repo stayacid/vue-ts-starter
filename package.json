@@ -34,8 +34,11 @@
     "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
+    "svgo": "^1.1.0",
+    "svgo-loader": "^2.1.0",
     "typescript": "~3.9.3",
     "vue-cli-plugin-pug": "~1.0.7",
+    "vue-cli-plugin-svg-sprite": "~1.0.0",
     "vue-template-compiler": "^2.6.11"
   }
 }

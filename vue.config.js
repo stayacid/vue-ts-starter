@@ -5,6 +5,7 @@ module.exports = {
       template: './public/index.pug',
     },
   },
+
   css: {
     loaderOptions: {
       scss: {
@@ -18,5 +19,12 @@ module.exports = {
           @import "~@/scss/_typography.scss";`,
       },
     },
+  },
+
+  chainWebpack: config => {
+    config.module
+      .rule('svg-sprite')
+      .use('svgo-loader')
+      .loader('svgo-loader')
   },
 }
