@@ -5,9 +5,11 @@
   </svg>
 </template>
 
-<script>
-export default {
-  name: 'svg-icon',
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator'
+
+export default class SvgIcon extends Vue {
+  private name!: 'svg-icon'
 
   props: {
     name: {
@@ -23,7 +25,7 @@ export default {
 
   computed: {
     iconPath () {
-      let icon = require(`@/assets/icons/${this.name}.svg`)
+      import icon = require(`@/assets/icons/${this.name}.svg`)
       if (Object.prototype.hasOwnProperty.call(icon, 'default')) {
         icon = icon.default
       }

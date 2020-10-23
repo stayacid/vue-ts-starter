@@ -1,5 +1,6 @@
 <template lang="pug">
   .hello
+    <SvgIcon name="arrow-right"></SvgIcon>
     h1 {{ msg }}
     p
       | For a guide and recipes on how to configure / customize this project,
@@ -33,8 +34,13 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import SvgIcon from './SvgIcon.vue'
 
-@Component
+@Component({
+  components: {
+    SvgIcon,
+  },
+})
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
 }
