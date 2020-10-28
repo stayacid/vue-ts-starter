@@ -10,30 +10,16 @@
       slot
 </template>
 
-<script>
-export default {
-  props: {
-    iconName: {
-      type: String,
-      default: 'box',
-    },
-    width: {
-      type: [Number, String],
-      default: 18,
-    },
-    height: {
-      type: [Number, String],
-      default: 18,
-    },
-    viewbox: {
-      type: [String],
-      default: '0 0 18 18',
-    },
-    iconColor: {
-      type: String,
-      default: 'white',
-    },
-  },
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component
+export default class IconBase extends Vue {
+  iconName = 'box';
+  width: number | string = 18;
+  height: number | string = 18;
+  viewbox = '0 0 18 18'
+  iconColor = 'white'
 }
 </script>
 

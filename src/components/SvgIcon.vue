@@ -1,42 +1,31 @@
 <template>
   <svg :class="className" xmlns="http://www.w3.org/2000/svg">
     <title v-if="title">{{ title }}</title>
-    <use :xlink:href="iconPath" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+    <use :xlink:href="iconPath" xmlns:xlink="http://www.w3.org/1999/xlink" />
   </svg>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
+@Component
 export default class SvgIcon extends Vue {
-  private name!: 'svg-icon'
+  // props
+  name = 'svg-icon';
+  title: string | null = null;
 
-  props: {
-    name: {
-      type: String,
-      required: true,
-    },
+  //  computed
+  get iconPath() {
+    let icon = require(`@/assets/icons/${this.name}.svg`)
+    if (Object.prototype.hasOwnProperty.call(icon, 'default')) {
+      icon = icon.default
+    }
+    return icon.url
+  }
 
-    title: {
-      type: String,
-      default: null,
-    },
-  },
-
-  computed: {
-    iconPath () {
-      import icon = require(`@/assets/icons/${this.name}.svg`)
-      if (Object.prototype.hasOwnProperty.call(icon, 'default')) {
-        icon = icon.default
-      }
-
-      return icon.url
-    },
-
-    className () {
-      return 'svg-icon svg-icon--' + this.name
-    },
-  },
+  get className() {
+    return 'svg-icon svg-icon--' + this.name
+  }
 }
 </script>
 

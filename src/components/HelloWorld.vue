@@ -42,7 +42,7 @@ import SvgIcon from './SvgIcon.vue'
   },
 })
 export default class HelloWorld extends Vue {
-  @Prop() private msg!: string;
+  @Prop() msg!: string; // ! needed if has no default value
 }
 </script>
 
