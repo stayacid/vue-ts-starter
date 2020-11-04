@@ -19,5 +19,6 @@ module.exports = {
     "@typescript-eslint/no-var-requires": 1, // disallows let a = require('smthing')
     "semi": 1,
     "eol-last": 1,
+    "quotes": 1,
   },
 }

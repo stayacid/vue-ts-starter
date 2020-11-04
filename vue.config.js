@@ -9,11 +9,10 @@ module.exports = {
   css: {
     loaderOptions: {
       scss: {
+        // this is only for scss variables and mixins! All really rendered styles should be imported in main.ts
         prependData: `
-          @import "~@/scss/helpers/helpers.scss";
-          @import "~@/scss/mixins/mixins.scss";
-          @import "~@/scss/components/components.scss";
-        `,
+          @import "~@/scss/helpers/_variables.scss";
+          @import "~@/scss/mixins/mixins.scss";`,
       },
     },
   },
