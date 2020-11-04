@@ -1,18 +1,18 @@
 <template>
-  <svg :class="className" xmlns="http://www.w3.org/2000/svg">
-    <title v-if="title">{{ title }}</title>
+  <svg :class="className" xmlns="http://www.w3.org/2000/svg" :fill="fill" :stroke="stroke">
     <use :xlink:href="iconPath" xmlns:xlink="http://www.w3.org/1999/xlink" />
   </svg>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class SvgIcon extends Vue {
   // props
-  name = 'svg-icon';
-  title: string | null = null;
+  @Prop({ default: 'svg-icon' }) readonly name!: string;
+  @Prop() readonly fill: string | undefined;
+  @Prop() readonly stroke: string | undefined;
 
   //  computed
   get iconPath() {
@@ -24,7 +24,7 @@ export default class SvgIcon extends Vue {
   }
 
   get className() {
-    return 'svg-icon svg-icon--' + this.name
+    return 'svg-icon svg-icon__' + this.name
   }
 }
 </script>

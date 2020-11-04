@@ -17,5 +17,7 @@ module.exports = {
     "comma-dangle": ["error", "always-multiline"],
     "space-before-function-paren": ["error", "never"],
     "@typescript-eslint/no-var-requires": 1, // disallows let a = require('smthing')
+    "semi": 1,
+    "eol-last": 1,
   },
 }
