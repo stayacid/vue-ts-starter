@@ -31,8 +31,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 * `src/components` - folder with custom `.vue` components
 * `src/router` - Vue router
 
-* `src/scss` - put custom app SCSS styles here. Don't forget to import them in `vue.config.js`
-  * `src/scss/components` - common styles for buttons, input, components, etc
+* `src/scss` - put custom app SCSS styles here. Variables and mixins imported in `vue.config.js`. Other common styles imported in `App.vue` (note that `<style>` in App.vue shouldn't be scoped)
+  * `src/scss/components` - common styles for buttons, input, components, container, typography, etc
   * `src/scss/helpers` - variables, normalize.scss, basic styles, font-face
   * `src/scss/libs` - import styles from libs here
   * `src/scss/mixins` - scss mixins
