@@ -16,6 +16,7 @@ export default class SvgIcon extends Vue {
 
   //  computed
   get iconPath() {
+    // eslint-disable-next-line
     let icon = require(`@/assets/icons/${this.name}.svg`)
     if (Object.prototype.hasOwnProperty.call(icon, 'default')) {
       icon = icon.default

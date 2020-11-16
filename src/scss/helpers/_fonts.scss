@@ -18,3 +18,11 @@ bold 700
 extrabold 800
 heavy/black 900
 */
+
+@include font-face( 
+  "Roboto",
+  "/public/fonts/Roboto-Medium",
+  500,
+  normal,
+  woff2 
+);

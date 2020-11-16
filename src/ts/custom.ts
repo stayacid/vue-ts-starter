@@ -1,3 +1,3 @@
-const exampleFunction = () => console.log(42);
+const exampleFunction = () => console.log(42)
 
-export { exampleFunction };
+export { exampleFunction }
